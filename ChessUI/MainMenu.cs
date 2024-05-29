@@ -95,5 +95,13 @@ namespace ChessUI
             var temp = new DashboardForm.ChoosePVPMode(this);
             LoadForm(temp);
         }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            var Login = new LoginForm();
+            Login.Show();
+            this.Hide();
+            MessageBox.Show("You have been logged out");
+        }
     }
 }

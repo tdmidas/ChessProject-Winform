@@ -86,15 +86,7 @@ namespace ChessUI
             }
         }
 
-        protected virtual void OnMoveReceived(string move)
-        {
-            MoveReceived?.Invoke(this, move);
-        }
-
-        public void StopListening()
-        {
-            server.Stop();
-        }
+       
 
     }
 }

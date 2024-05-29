@@ -39,7 +39,7 @@
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 13F);
-            label2.Location = new System.Drawing.Point(392, 167);
+            label2.Location = new System.Drawing.Point(108, 127);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(374, 30);
             label2.TabIndex = 5;
@@ -50,7 +50,7 @@
             label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 23F);
-            label1.Location = new System.Drawing.Point(352, 89);
+            label1.Location = new System.Drawing.Point(68, 49);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(469, 52);
             label1.TabIndex = 4;
@@ -61,7 +61,7 @@
             label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            label3.Location = new System.Drawing.Point(374, 303);
+            label3.Location = new System.Drawing.Point(68, 255);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(460, 28);
             label3.TabIndex = 7;
@@ -69,7 +69,7 @@
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(498, 237);
+            button1.Location = new System.Drawing.Point(214, 197);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(122, 40);
             button1.TabIndex = 8;
@@ -81,7 +81,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(964, 450);
+            ClientSize = new System.Drawing.Size(584, 302);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);

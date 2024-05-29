@@ -13,10 +13,10 @@ namespace ChessUI.DashboardForm
     public partial class WaitingRoom : Form
     {
         MainMenu parentForm;
-        public WaitingRoom(MainMenu parentf)
+
+        public WaitingRoom()
         {
             InitializeComponent();
-            parentForm = parentf;
         }
 
         private void WaitingRoom_Load(object sender, EventArgs e)

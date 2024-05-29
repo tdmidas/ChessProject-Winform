@@ -90,7 +90,7 @@
             panel5.Location = new System.Drawing.Point(3, 81);
             panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(185, 46);
+            panel5.Size = new System.Drawing.Size(203, 73);
             panel5.TabIndex = 6;
             // 
             // MenuButton
@@ -99,7 +99,7 @@
             MenuButton.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold);
             MenuButton.Image = (System.Drawing.Image)resources.GetObject("MenuButton.Image");
             MenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            MenuButton.Location = new System.Drawing.Point(-16, -12);
+            MenuButton.Location = new System.Drawing.Point(-3, -2);
             MenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MenuButton.Name = "MenuButton";
             MenuButton.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
@@ -112,10 +112,10 @@
             // HomePanel
             // 
             HomePanel.Controls.Add(HomeButton);
-            HomePanel.Location = new System.Drawing.Point(3, 131);
+            HomePanel.Location = new System.Drawing.Point(3, 158);
             HomePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             HomePanel.Name = "HomePanel";
-            HomePanel.Size = new System.Drawing.Size(185, 46);
+            HomePanel.Size = new System.Drawing.Size(203, 73);
             HomePanel.TabIndex = 4;
             // 
             // HomeButton
@@ -124,11 +124,11 @@
             HomeButton.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold);
             HomeButton.Image = (System.Drawing.Image)resources.GetObject("HomeButton.Image");
             HomeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            HomeButton.Location = new System.Drawing.Point(-16, -12);
+            HomeButton.Location = new System.Drawing.Point(-3, -12);
             HomeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             HomeButton.Name = "HomeButton";
             HomeButton.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            HomeButton.Size = new System.Drawing.Size(222, 73);
+            HomeButton.Size = new System.Drawing.Size(222, 83);
             HomeButton.TabIndex = 0;
             HomeButton.Text = "Home";
             HomeButton.UseVisualStyleBackColor = true;
@@ -137,10 +137,10 @@
             // panel1
             // 
             panel1.Controls.Add(PvEButton);
-            panel1.Location = new System.Drawing.Point(3, 181);
+            panel1.Location = new System.Drawing.Point(3, 235);
             panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(185, 46);
+            panel1.Size = new System.Drawing.Size(203, 75);
             panel1.TabIndex = 2;
             // 
             // PvEButton
@@ -148,10 +148,10 @@
             PvEButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             PvEButton.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold);
             PvEButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            PvEButton.Location = new System.Drawing.Point(-36, -12);
+            PvEButton.Location = new System.Drawing.Point(-12, -11);
             PvEButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             PvEButton.Name = "PvEButton";
-            PvEButton.Size = new System.Drawing.Size(242, 73);
+            PvEButton.Size = new System.Drawing.Size(242, 82);
             PvEButton.TabIndex = 0;
             PvEButton.Text = "🤖 PvE 🤖 ";
             PvEButton.UseVisualStyleBackColor = true;
@@ -160,10 +160,10 @@
             // panel2
             // 
             panel2.Controls.Add(PvPButton);
-            panel2.Location = new System.Drawing.Point(3, 231);
+            panel2.Location = new System.Drawing.Point(3, 314);
             panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(185, 46);
+            panel2.Size = new System.Drawing.Size(203, 77);
             panel2.TabIndex = 3;
             // 
             // PvPButton
@@ -171,7 +171,7 @@
             PvPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             PvPButton.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold);
             PvPButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            PvPButton.Location = new System.Drawing.Point(-44, -12);
+            PvPButton.Location = new System.Drawing.Point(-20, -4);
             PvPButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             PvPButton.Name = "PvPButton";
             PvPButton.Size = new System.Drawing.Size(250, 73);
@@ -183,10 +183,10 @@
             // panel7
             // 
             panel7.Controls.Add(LogoutButton);
-            panel7.Location = new System.Drawing.Point(3, 281);
+            panel7.Location = new System.Drawing.Point(3, 395);
             panel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             panel7.Name = "panel7";
-            panel7.Size = new System.Drawing.Size(185, 46);
+            panel7.Size = new System.Drawing.Size(203, 70);
             panel7.TabIndex = 7;
             // 
             // LogoutButton
@@ -195,7 +195,7 @@
             LogoutButton.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold);
             LogoutButton.Image = (System.Drawing.Image)resources.GetObject("LogoutButton.Image");
             LogoutButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            LogoutButton.Location = new System.Drawing.Point(-16, -12);
+            LogoutButton.Location = new System.Drawing.Point(-3, -8);
             LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             LogoutButton.Name = "LogoutButton";
             LogoutButton.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
@@ -203,6 +203,7 @@
             LogoutButton.TabIndex = 0;
             LogoutButton.Text = "Logout";
             LogoutButton.UseVisualStyleBackColor = true;
+            LogoutButton.Click += LogoutButton_Click;
             // 
             // SideBarTimer
             // 
@@ -215,14 +216,14 @@
             MainPanel.Location = new System.Drawing.Point(0, 0);
             MainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new System.Drawing.Size(962, 519);
+            MainPanel.Size = new System.Drawing.Size(1037, 515);
             MainPanel.TabIndex = 4;
             // 
             // MainMenu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(962, 519);
+            ClientSize = new System.Drawing.Size(1037, 515);
             Controls.Add(SideBar);
             Controls.Add(MainPanel);
             Name = "MainMenu";

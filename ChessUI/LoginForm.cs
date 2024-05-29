@@ -26,6 +26,7 @@ namespace ChessUI
         private IMongoCollection<User> _userCollection;
         public LoginForm()
         {
+            pwLogin.PasswordChar = '*';
             InitializeComponent();
             InitializeMongoDB();
 

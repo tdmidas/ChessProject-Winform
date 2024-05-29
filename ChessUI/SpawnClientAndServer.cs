@@ -19,8 +19,10 @@ namespace ChessUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TwoPlayerLAN twoPlayerLAN = new TwoPlayerLAN(TimeSpan.FromMinutes(10),"Medium");
-            twoPlayerLAN.Show();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
+            
+
         }
 
         private void button2_Click(object sender, EventArgs e)

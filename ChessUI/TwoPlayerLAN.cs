@@ -13,20 +13,20 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using ChessUI.DashboardForm;
+
 namespace ChessUI
 {
     public partial class TwoPlayerLAN : Form
     {
         private bool isRemoteMove = false;
         private TcpClient client;
+        private TcpListener server;
         private NetworkStream clientStream;
-        private byte[] message = new byte[4096];
         private NetworkStream stream;
-        private IStockfish _stockfish;
+        private byte[] message = new byte[4096];
         private TimeSpan gameTime;
         private Player initialPlayer;
-        private Player humanPlayer;
-        private Player stockfishPlayer;
         private string difficulty;
         private Label[] _squareLabels;
         private Dictionary<string, Point> _whiteLocations;
@@ -37,6 +37,8 @@ namespace ChessUI
         private TimeSpan whiteTimeRemaining;
         private TimeSpan blackTimeRemaining;
         private byte[] buffer = new byte[4096];
+        private bool isHost;
+        private string ip;
 
         private static string InvertSquare(string sq)
         {
@@ -44,7 +46,8 @@ namespace ChessUI
             var r = '9' - sq[5];
             return "lbl_" + f + r;
         }
-        public TwoPlayerLAN(TimeSpan selectedTime, string selectedDifficulty)
+
+        public TwoPlayerLAN(TimeSpan selectedTime, string selectedDifficulty, bool isHost, string ip = null)
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -55,7 +58,10 @@ namespace ChessUI
             InitializeLabels();
             InitializeBoard();
             DrawBoard();
+            this.isHost = isHost;
+            this.ip = ip;
         }
+
         private void InitializeTimer()
         {
             timer = new System.Windows.Forms.Timer
@@ -111,6 +117,7 @@ namespace ChessUI
         {
             return player == Player.White ? Player.Black : Player.White;
         }
+
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (_gameBoard.WhoseTurn == Player.White)
@@ -160,36 +167,28 @@ namespace ChessUI
         private void SquaresLabels_Click(object? sender, EventArgs e)
         {
             Label selectedLabel = (Label)sender!;
-            var file = (File)(selectedLabel.Name[4] - 'A');
-            var rank = (Rank)(selectedLabel.Name[5] - '1');
-            Square clickedSquare = new Square(file, rank);
-
             if (selectedLabel.BackColor != Color.DarkCyan)
             {
                 // Re-draw to remove previously colored labels.
                 DrawBoard(GetPlayerInCheck());
 
-                if (_gameBoard[file, rank]?.Owner != _gameBoard.WhoseTurn)
-                    return;
-
-                _selectedSourceSquare = clickedSquare;
-
-                var validDestinations = ChessUtilities.GetValidMovesOfSourceSquare(_selectedSourceSquare, _gameBoard)
-                                                      .Select(m => m.Destination)
-                                                      .ToArray();
-
-                if (validDestinations.Length == 0)
-                    return;
-
-                selectedLabel.BackColor = Color.Cyan;
-                Array.ForEach(validDestinations, square =>
+                // Check if it's the current player's turn and allow them to move their respective pieces
+                if ((isHost && _gameBoard.WhoseTurn == Player.White && selectedLabel.Tag?.ToString() == Player.White.ToString()) ||
+                    (!isHost && _gameBoard.WhoseTurn == Player.Black && selectedLabel.Tag?.ToString() == Player.Black.ToString()))
                 {
-                    _squareLabels.First(lbl => lbl.Name == $"lbl_{square}").BackColor = Color.DarkCyan;
-                });
+                    _selectedSourceSquare = selectedLabel.Name.AsSpan().Slice("lbl_".Length); // implicit conversion
+                    var validDestinations = ChessUtilities.GetValidMovesOfSourceSquare(_selectedSourceSquare, _gameBoard).Select(m => m.Destination).ToArray();
+                    if (validDestinations.Length == 0) return;
+                    selectedLabel.BackColor = Color.Cyan;
+                    Array.ForEach(validDestinations, square =>
+                    {
+                        _squareLabels.First(lbl => lbl.Name == $"lbl_{square}").BackColor = Color.DarkCyan;
+                    });
+                }
             }
             else
             {
-                MakeMove(_selectedSourceSquare, clickedSquare);
+                MakeMove(_selectedSourceSquare, selectedLabel.Name.AsSpan().Slice("lbl_".Length));
             }
         }
 
@@ -228,20 +227,16 @@ namespace ChessUI
             timer.Stop();
             // Additional end game logic here (e.g., disable moves, show final message, etc.)
         }
+
         private string SquareToNotation(Square square)
         {
             return $"{(char)('a' + (int)square.File)}{(int)square.Rank + 1}";
         }
+
         private async void MakeMove(Square source, Square destination)
         {
             try
             {
-                if (_gameBoard[source.File, source.Rank] == null)
-                {
-                    MessageBox.Show("Source square has no piece!", "Invalid Move", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-
                 Player player = _gameBoard.WhoseTurn;
                 PawnPromotion? pawnPromotion = null;
                 if (_gameBoard[source.File, source.Rank] is Pawn)
@@ -260,14 +255,12 @@ namespace ChessUI
                 }
 
                 var move = new Move(source, destination, player, pawnPromotion);
-
                 if (!_gameBoard.IsValidMove(move))
                 {
-                    MessageBox.Show("Invalid Move!", "Chess", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
                 _gameBoard.MakeMove(move, isMoveValidated: true);
+
                 DrawBoard(GetPlayerInCheck());
 
                 // Log move to ListView
@@ -288,20 +281,14 @@ namespace ChessUI
                     EndGame();
                     return;
                 }
-
                 SoundPlayer moveSoundPlayer = new SoundPlayer(Properties.Resources.Move);
                 moveSoundPlayer.Play();
-
-                if (!isRemoteMove)
+                if (isRemoteMove)
                 {
-                    SendMessage(moveNotation);
+                    isRemoteMove = false;
+                    return;
                 }
-
-                isRemoteMove = false; // Reset the flag after the move is made
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                MessageBox.Show($"Index out of range error\n{ex.Message}\n\n{ex.StackTrace}", "Chess", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SendMessage(moveNotation);
             }
             catch (Exception exception)
             {
@@ -309,37 +296,65 @@ namespace ChessUI
             }
         }
 
-        private async void ConnectToOpponent()
+        private void ConnectToOpponent()
         {
-            client = new TcpClient();
-            await client.ConnectAsync("127.0.0.1", 8080);
+            if (isHost)
+            {
+                server = new TcpListener(System.Net.IPAddress.Any, 8080);
+                server.Start();
+                Thread acceptThread = new Thread(AcceptClient);
+                acceptThread.Start();
+            }
+            else
+            {
+                client = new TcpClient();
+                client.Connect(ip, 8080);
+                clientStream = client.GetStream();
+                stream = client.GetStream();
+                Thread receiveThread = new Thread(ReceiveMessages);
+                receiveThread.Start();
+                if (_gameBoard.WhoseTurn == Player.Black)
+                {
+                    FlipUi(Player.Black);
+                }
+            }
+        }
+
+        private void AcceptClient()
+        {
+            client = server.AcceptTcpClient();
             clientStream = client.GetStream();
             stream = client.GetStream();
-            Task.Run(() => ReceiveMessages());
-
-            
+            Invoke((MethodInvoker)delegate
+            {
+                // Close the waiting form if it is open
+                WaitingRoom waitingForm = Application.OpenForms.OfType<WaitingRoom>().FirstOrDefault();
+                if (waitingForm != null)
+                {
+                    waitingForm.Close();
+                    timer.Start();
+                }
+            });
+            Thread receiveThread = new Thread(ReceiveMessages);
+            receiveThread.Start();
         }
 
-
-        private async Task SendMessage(string message)
+        private void SendMessage(string message)
         {
-            byte[] bytesToSend = Encoding.ASCII.GetBytes(message);
-            await clientStream.WriteAsync(bytesToSend, 0, bytesToSend.Length);
-            
+            byte[] buffer = Encoding.ASCII.GetBytes(message);
+            stream.Write(buffer, 0, buffer.Length);
         }
+
         private void ReceiveMessages()
         {
             int bytesRead;
-
             while (true)
             {
                 bytesRead = clientStream.Read(message, 0, 4096);
                 string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
                 richTextBox1.AppendText(receivedMessage + "\n");
                 HandleReceivedMove(receivedMessage);
-                
             }
-
         }
 
         private Square ParseSquare(string squareString)
@@ -348,6 +363,7 @@ namespace ChessUI
             Rank rank = (Rank)(squareString[1] - '1');
             return new Square(file, rank);
         }
+
         private void HandleReceivedMove(string receivedMove)
         {
             Square source = ParseSquare(receivedMove.Substring(0, 2));
@@ -358,11 +374,17 @@ namespace ChessUI
 
         private async void TwoPlayerLAN_Load(object sender, EventArgs e)
         {
+            if (isHost)
+            {
+                WaitingRoom waitingForm = new WaitingRoom();
+                waitingForm.Show(this);
+                timer.Stop();
+            }
+            else
+            {
+                FlipUi(Player.Black);
+            }
             ConnectToOpponent();
-            await Task.Delay(1000);
-            await SendMessage("Hello");
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -378,7 +400,6 @@ namespace ChessUI
             {
                 timer.Start();
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -387,7 +408,5 @@ namespace ChessUI
             MessageBox.Show($"{currentPlayer} has resigned. {GetOpponent(currentPlayer)} wins!", "Resign", MessageBoxButtons.OK, MessageBoxIcon.Information);
             EndGame();
         }
-       
-       
     }
 }

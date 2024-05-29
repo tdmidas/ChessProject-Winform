@@ -40,10 +40,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label2.Location = new System.Drawing.Point(653, 149);
+            label2.Font = new System.Drawing.Font("Calibri", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label2.Location = new System.Drawing.Point(671, 135);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(287, 126);
+            label2.Size = new System.Drawing.Size(260, 135);
             label2.TabIndex = 21;
             label2.Text = "Welcome user,\r\nplease choose \r\nyour play mode";
             // 
@@ -51,7 +51,8 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Showcard Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label1.Location = new System.Drawing.Point(244, 48);
+            label1.ForeColor = System.Drawing.Color.SandyBrown;
+            label1.Location = new System.Drawing.Point(261, 9);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(384, 98);
             label1.TabIndex = 20;
@@ -65,7 +66,7 @@
             PvEButton.FlatAppearance.BorderSize = 0;
             PvEButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             PvEButton.Font = new System.Drawing.Font("Showcard Gothic", 22.2F, System.Drawing.FontStyle.Bold);
-            PvEButton.Location = new System.Drawing.Point(653, 283);
+            PvEButton.Location = new System.Drawing.Point(681, 288);
             PvEButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             PvEButton.Name = "PvEButton";
             PvEButton.Size = new System.Drawing.Size(222, 58);
@@ -83,7 +84,7 @@
             PvPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             PvPButton.Font = new System.Drawing.Font("Showcard Gothic", 22.2F, System.Drawing.FontStyle.Bold);
             PvPButton.ForeColor = System.Drawing.Color.Sienna;
-            PvPButton.Location = new System.Drawing.Point(653, 382);
+            PvPButton.Location = new System.Drawing.Point(681, 380);
             PvPButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             PvPButton.Name = "PvPButton";
             PvPButton.Size = new System.Drawing.Size(222, 58);
@@ -94,15 +95,13 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new System.Drawing.Point(244, 129);
-            pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            pictureBox1.BackgroundImage = (System.Drawing.Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            pictureBox1.Location = new System.Drawing.Point(262, 125);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(381, 331);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 17;
+            pictureBox1.Size = new System.Drawing.Size(383, 339);
+            pictureBox1.TabIndex = 22;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // Home
             // 
@@ -110,11 +109,11 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ButtonHighlight;
             ClientSize = new System.Drawing.Size(1108, 518);
+            Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(PvEButton);
             Controls.Add(PvPButton);
-            Controls.Add(pictureBox1);
             Name = "Home";
             Text = "Home";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

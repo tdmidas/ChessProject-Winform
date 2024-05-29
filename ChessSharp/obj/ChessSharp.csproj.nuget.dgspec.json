@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {}
+    "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {}
   },
   "projects": {
-    "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
+    "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
+        "projectUniqueName": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
         "projectName": "ChessSharp",
-        "projectPath": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
+        "projectPath": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
         "packagesPath": "C:\\Users\\minh dao\\.nuget\\packages\\",
-        "outputPath": "F:\\ChessProject2\\ChessSharp\\obj\\",
+        "outputPath": "f:\\ChessProject2\\ChessSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\minh dao\\AppData\\Roaming\\NuGet\\NuGet.Config",

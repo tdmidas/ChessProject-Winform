@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage3 = new System.Windows.Forms.TabPage();
+            label8 = new System.Windows.Forms.Label();
             tabPage1 = new System.Windows.Forms.TabPage();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             tabPage2 = new System.Windows.Forms.TabPage();
             label13 = new System.Windows.Forms.Label();
             tabControl1 = new System.Windows.Forms.TabControl();
-            label8 = new System.Windows.Forms.Label();
             tabControl2.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -79,6 +79,16 @@
             tabPage3.TabIndex = 0;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Segoe UI", 19.8000011F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label8.Location = new System.Drawing.Point(87, 39);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(240, 46);
+            label8.TabIndex = 0;
+            label8.Text = "WELCOME TO";
             // 
             // tabPage1
             // 
@@ -131,13 +141,13 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("UTM Avo", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label3.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            label3.Location = new System.Drawing.Point(77, 36);
+            label3.Location = new System.Drawing.Point(55, 53);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(330, 41);
+            label3.Size = new System.Drawing.Size(380, 35);
             label3.TabIndex = 20;
-            label3.Text = "Đăng nhập tài khoản";
+            label3.Text = "Login to your account";
             // 
             // pwLogin
             // 
@@ -256,12 +266,12 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label13.Location = new System.Drawing.Point(100, 55);
+            label13.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label13.Location = new System.Drawing.Point(57, 53);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(288, 36);
+            label13.Size = new System.Drawing.Size(359, 37);
             label13.TabIndex = 27;
-            label13.Text = "Đăng ký tài khoản";
+            label13.Text = "signup new account";
             // 
             // tabControl1
             // 
@@ -274,21 +284,11 @@
             tabControl1.Size = new System.Drawing.Size(478, 559);
             tabControl1.TabIndex = 8;
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Segoe UI", 19.8000011F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label8.Location = new System.Drawing.Point(87, 39);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(240, 46);
-            label8.TabIndex = 0;
-            label8.Text = "WELCOME TO";
-            // 
             // LoginForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(887, 544);
+            ClientSize = new System.Drawing.Size(887, 498);
             Controls.Add(tabControl1);
             Controls.Add(tabControl2);
             Name = "LoginForm";
