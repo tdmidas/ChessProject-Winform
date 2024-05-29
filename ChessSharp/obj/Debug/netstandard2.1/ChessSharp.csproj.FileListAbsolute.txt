@@ -17,3 +17,4 @@ F:\ChessProject2\ChessSharp\obj\Debug\netstandard2.1\ChessSharp.pdb
 F:\ChessProject2\ChessSharp\bin\Debug\netstandard2.1\ChessSharp.deps.json
 F:\ChessProject2\ChessSharp\bin\Debug\netstandard2.1\ChessSharp.dll
 F:\ChessProject2\ChessSharp\bin\Debug\netstandard2.1\ChessSharp.pdb
+F:\ChessProject2\ChessSharp\obj\Debug\netstandard2.1\ChessSharp.sourcelink.json

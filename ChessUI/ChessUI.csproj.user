@@ -2,6 +2,30 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="ChatServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ChessServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DashboardForm\ChoosePVEMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DashboardForm\ChoosePVPMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DashboardForm\Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DashboardForm\WaitingRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GameSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="SinglePlayer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -11,7 +35,10 @@
     <Compile Update="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Menu.cs">
+    <Compile Update="SpawnClientAndServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TwoPlayerLAN.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

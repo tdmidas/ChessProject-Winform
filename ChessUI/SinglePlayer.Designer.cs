@@ -112,6 +112,10 @@
             checkBox1 = new System.Windows.Forms.CheckBox();
             listView1 = new System.Windows.Forms.ListView();
             label17 = new System.Windows.Forms.Label();
+            button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
+            blackLabel = new System.Windows.Forms.Label();
+            whiteLabel = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // lbl_A1
@@ -920,7 +924,7 @@
             // 
             // listView1
             // 
-            listView1.Location = new System.Drawing.Point(804, 156);
+            listView1.Location = new System.Drawing.Point(802, 200);
             listView1.Name = "listView1";
             listView1.Size = new System.Drawing.Size(424, 363);
             listView1.TabIndex = 87;
@@ -929,18 +933,68 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label17.Location = new System.Drawing.Point(804, 109);
+            label17.Font = new System.Drawing.Font("Showcard Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label17.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            label17.Location = new System.Drawing.Point(802, 153);
             label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(115, 31);
+            label17.Size = new System.Drawing.Size(135, 29);
             label17.TabIndex = 88;
             label17.Text = "Move log";
+            // 
+            // button1
+            // 
+            button1.BackColor = System.Drawing.SystemColors.Info;
+            button1.Font = new System.Drawing.Font("Showcard Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            button1.Location = new System.Drawing.Point(805, 607);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(152, 65);
+            button1.TabIndex = 89;
+            button1.Text = "Resign";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = System.Drawing.SystemColors.Info;
+            button2.Font = new System.Drawing.Font("Showcard Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            button2.Location = new System.Drawing.Point(982, 606);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(207, 66);
+            button2.TabIndex = 90;
+            button2.Text = "Back to home";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
+            // blackLabel
+            // 
+            blackLabel.AutoSize = true;
+            blackLabel.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            blackLabel.Location = new System.Drawing.Point(802, 69);
+            blackLabel.Name = "blackLabel";
+            blackLabel.Size = new System.Drawing.Size(132, 35);
+            blackLabel.TabIndex = 91;
+            blackLabel.Text = "label18";
+            blackLabel.Click += blackLabel_Click;
+            // 
+            // whiteLabel
+            // 
+            whiteLabel.AutoSize = true;
+            whiteLabel.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            whiteLabel.Location = new System.Drawing.Point(816, 732);
+            whiteLabel.Name = "whiteLabel";
+            whiteLabel.Size = new System.Drawing.Size(132, 35);
+            whiteLabel.TabIndex = 92;
+            whiteLabel.Text = "label18";
             // 
             // SinglePlayer
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1389, 830);
+            Controls.Add(whiteLabel);
+            Controls.Add(blackLabel);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(label17);
             Controls.Add(listView1);
             Controls.Add(checkBox1);
@@ -1121,6 +1175,10 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label blackLabel;
+        private System.Windows.Forms.Label whiteLabel;
     }
 }
 

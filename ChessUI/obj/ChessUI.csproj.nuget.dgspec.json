@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "f:\\ChessProject2\\ChessUI\\ChessUI.csproj": {}
+    "F:\\ChessProject2\\ChessUI\\ChessUI.csproj": {}
   },
   "projects": {
-    "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
+    "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
+        "projectUniqueName": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
         "projectName": "ChessSharp",
-        "projectPath": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
+        "projectPath": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
         "packagesPath": "C:\\Users\\minh dao\\.nuget\\packages\\",
-        "outputPath": "f:\\ChessProject2\\ChessSharp\\obj\\",
+        "outputPath": "F:\\ChessProject2\\ChessSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\minh dao\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "f:\\ChessProject2\\ChessUI\\ChessUI.csproj": {
+    "F:\\ChessProject2\\ChessUI\\ChessUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\ChessProject2\\ChessUI\\ChessUI.csproj",
+        "projectUniqueName": "F:\\ChessProject2\\ChessUI\\ChessUI.csproj",
         "projectName": "ChessUI",
-        "projectPath": "f:\\ChessProject2\\ChessUI\\ChessUI.csproj",
+        "projectPath": "F:\\ChessProject2\\ChessUI\\ChessUI.csproj",
         "packagesPath": "C:\\Users\\minh dao\\.nuget\\packages\\",
-        "outputPath": "f:\\ChessProject2\\ChessUI\\obj\\",
+        "outputPath": "F:\\ChessProject2\\ChessUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\minh dao\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net8.0-windows10.0.22621": {
             "targetAlias": "net8.0-windows10.0.22621.0",
             "projectReferences": {
-              "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
-                "projectPath": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj"
+              "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
+                "projectPath": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj"
               }
             }
           }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7RPpl+tHZgANZozav77p6VyQZ+Ex7JDTnlHDWa2eXwbVtNDhk2yVpRweoQ1yklZtGlVOh2HypfmsAwOvhD1UyA==",
+  "dgSpecHash": "uanEKr6qJFSDzAO7kskO0lYoGY05qcpDl1nk0e92WwsY938QCQCer17R4eqG8ifagV2bfGuRCz/skSyWl2EpQQ==",
   "success": true,
-  "projectFilePath": "f:\\ChessProject2\\ChessUI\\ChessUI.csproj",
+  "projectFilePath": "F:\\ChessProject2\\ChessUI\\ChessUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\minh dao\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\minh dao\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

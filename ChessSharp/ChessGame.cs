@@ -22,7 +22,7 @@ namespace ChessSharp
         public Piece?[][] Board { get; private set; } // TODO: It's bad idea to expose this to public.
 
         /// <summary>Gets the <see cref="Player"/> who has turn.</summary>
-        public Player WhoseTurn { get; private set; } = Player.White;
+        public Player WhoseTurn { get; set; }
 
         /// <summary>Gets the current <see cref="ChessSharp.GameState"/>.</summary>
         public GameState GameState { get; private set; }
@@ -409,6 +409,10 @@ namespace ChessSharp
                 }
             }
 
+        }
+        public List<Move> MoveHistory()
+        {
+            return Moves.ToList();
         }
 
         public ChessGame DeepClone()

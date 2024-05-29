@@ -51,7 +51,8 @@ namespace ChessUI
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 MessageBox.Show("Login successful!");
-                Menu menu = new Menu();
+                MainMenu menu = new MainMenu();
+                
                 menu.Show();
             }
             else
