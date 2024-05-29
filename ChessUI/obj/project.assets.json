@@ -869,11 +869,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\ChessProject2\\ChessUI\\ChessUI.csproj",
+      "projectUniqueName": "F:\\ChessProject2\\ChessUI\\ChessUI.csproj",
       "projectName": "ChessUI",
-      "projectPath": "f:\\ChessProject2\\ChessUI\\ChessUI.csproj",
+      "projectPath": "F:\\ChessProject2\\ChessUI\\ChessUI.csproj",
       "packagesPath": "C:\\Users\\minh dao\\.nuget\\packages\\",
-      "outputPath": "f:\\ChessProject2\\ChessUI\\obj\\",
+      "outputPath": "F:\\ChessProject2\\ChessUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\minh dao\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -890,8 +890,8 @@
         "net8.0-windows10.0.22621": {
           "targetAlias": "net8.0-windows10.0.22621.0",
           "projectReferences": {
-            "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
-              "projectPath": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj"
+            "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj": {
+              "projectPath": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj"
             }
           }
         }
