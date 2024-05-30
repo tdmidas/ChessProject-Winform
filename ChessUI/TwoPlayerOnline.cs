@@ -1,23 +1,24 @@
-﻿using System;
+﻿using ChessSharp.SquareData;
+using ChessSharp;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using ChessSharp;
-using ChessSharp.Pieces;
-using ChessSharp.SquareData;
-using System.Media;
-using Stockfish.NET;
-using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ChessSharp.Pieces;
+using System.Media;
+using System.Text.RegularExpressions;
 using ChessUI.DashboardForm;
+using System.Threading;
 
 namespace ChessUI
 {
-    public partial class TwoPlayerLAN : Form
+    public partial class TwoPlayerOnline : Form
     {
         private bool isRemoteMove = false;
         private TcpClient client;
@@ -40,14 +41,7 @@ namespace ChessUI
         private bool isHost;
         private string ip;
 
-        private static string InvertSquare(string sq)
-        {
-            var f = (char)('A' + 'H' - sq[4]);
-            var r = '9' - sq[5];
-            return "lbl_" + f + r;
-        }
-
-        public TwoPlayerLAN(TimeSpan selectedTime, string selectedDifficulty, bool isHost, string ip = null)
+        public TwoPlayerOnline(TimeSpan selectedTime, string selectedDifficulty)
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -58,8 +52,13 @@ namespace ChessUI
             InitializeLabels();
             InitializeBoard();
             DrawBoard();
-            this.isHost = isHost;
-            this.ip = ip;
+        }
+
+        private static string InvertSquare(string sq)
+        {
+            var f = (char)('A' + 'H' - sq[4]);
+            var r = '9' - sq[5];
+            return "lbl_" + f + r;
         }
 
         private void InitializeTimer()
@@ -298,45 +297,13 @@ namespace ChessUI
 
         private void ConnectToOpponent()
         {
-            if (isHost)
-            {
-                server = new TcpListener(System.Net.IPAddress.Any, 8080);
-                server.Start();
-                Thread acceptThread = new Thread(AcceptClient);
-                acceptThread.Start();
-            }
-            else
-            {
-                client = new TcpClient();
-                client.Connect(ip, 8080);
-                clientStream = client.GetStream();
-                stream = client.GetStream();
-                Thread receiveThread = new Thread(ReceiveMessages);
-                receiveThread.Start();
-                if (_gameBoard.WhoseTurn == Player.Black)
-                {
-                    FlipUi(Player.Black);
-                }
-            }
-        }
-
-        private void AcceptClient()
-        {
-            client = server.AcceptTcpClient();
+            client = new TcpClient();
+            client.Connect("127.0.0.1", 8888);
             clientStream = client.GetStream();
             stream = client.GetStream();
-            Invoke((MethodInvoker)delegate
-            {
-                // Close the waiting form if it is open
-                WaitingRoom waitingForm = Application.OpenForms.OfType<WaitingRoom>().FirstOrDefault();
-                if (waitingForm != null)
-                {
-                    waitingForm.Close();
-                    timer.Start();
-                }
-            });
             Thread receiveThread = new Thread(ReceiveMessages);
             receiveThread.Start();
+            
         }
 
         private void SendMessage(string message)
@@ -352,14 +319,25 @@ namespace ChessUI
             {
                 bytesRead = clientStream.Read(message, 0, 4096);
                 string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
-                if (receivedMessage == "resign")
+                if (receivedMessage.StartsWith("isHost:"))
+                {
+                    isHost = receivedMessage.Split(':')[1] == "true";
+                    if (!isHost)
+                    {
+                        FlipUi(Player.Black);
+                    }
+                }
+                else if (receivedMessage == "resign")
                 {
                     MessageBox.Show($"{GetOpponent(_gameBoard.WhoseTurn)} has resigned. {_gameBoard.WhoseTurn} wins!", "Resign", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     EndGame();
                     return;
                 }
-                richTextBox1.AppendText(receivedMessage + "\n");
-                HandleReceivedMove(receivedMessage);
+                else
+                {
+                    richTextBox1.AppendText(receivedMessage + "\n");
+                    HandleReceivedMove(receivedMessage);
+                }
             }
         }
 
@@ -378,19 +356,11 @@ namespace ChessUI
             MakeMove(source, destination);
         }
 
-        private async void TwoPlayerLAN_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (isHost)
-            {
-                WaitingRoom waitingForm = new WaitingRoom();
-                waitingForm.Show(this);
-                timer.Stop();
-            }
-            else
-            {
-                FlipUi(Player.Black);
-            }
-            ConnectToOpponent();
+            Player currentPlayer = _gameBoard.WhoseTurn;
+            MessageBox.Show($"{currentPlayer} has resigned. {GetOpponent(currentPlayer)} wins!", "Resign", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EndGame();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -408,13 +378,9 @@ namespace ChessUI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void TwoPlayerOnline_Load(object sender, EventArgs e)
         {
-            Player currentPlayer = _gameBoard.WhoseTurn;
-            SendMessage("resign");
-            MessageBox.Show($"{currentPlayer} has resigned. {GetOpponent(currentPlayer)} wins!", "Resign", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            EndGame();
+            ConnectToOpponent();
         }
     }
 }

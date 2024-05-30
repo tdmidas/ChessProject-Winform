@@ -42,11 +42,19 @@ namespace ChessUI.DashboardForm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var newGame = new TwoPlayerLAN(TimeSpan.FromMinutes(10), "Medium", false,textBox1.Text);
+            var newGame = new TwoPlayerLAN(TimeSpan.FromMinutes(10), "Medium", false, textBox1.Text);
             Visible = false;
             if (!newGame.IsDisposed)
                 newGame.ShowDialog();
             Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (parentForm != null)
+            {
+                parentForm.LoadForm(new JoinGame(parentForm));
+            }
         }
     }
 }

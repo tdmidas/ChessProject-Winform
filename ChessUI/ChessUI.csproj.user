@@ -17,6 +17,9 @@
     <Compile Update="DashboardForm\Home.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ChatServerAndClient\JoinGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DashboardForm\WaitingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -39,6 +42,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TwoPlayerLAN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TwoPlayerOnline.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

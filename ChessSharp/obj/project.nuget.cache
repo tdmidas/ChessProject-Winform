@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DwTP4KKkD9TpM4LqYx4LOJtVjImrKRHxzMG5qABrhPyZFwxL0V9kyA+Ddp1unMz2KeNd2CP54bC+hTKKyGs43Q==",
+  "dgSpecHash": "MrxcX/4GRtsNxvGxixBQNFHOXIbytnfZ8Gg0CzLJhHmts3VkFz8m2VYYJcBr7SM3FNSlNrDT9w6ieZA8CKHYPg==",
   "success": true,
-  "projectFilePath": "F:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
+  "projectFilePath": "f:\\ChessProject2\\ChessSharp\\ChessSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -78,6 +78,7 @@
             button3.TabIndex = 10;
             button3.Text = "JOIN AUTOMATICALLY";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // pictureBox1
             // 

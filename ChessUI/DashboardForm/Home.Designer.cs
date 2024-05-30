@@ -41,7 +41,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Calibri", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label2.Location = new System.Drawing.Point(671, 135);
+            label2.Location = new System.Drawing.Point(665, 56);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(260, 135);
             label2.TabIndex = 21;

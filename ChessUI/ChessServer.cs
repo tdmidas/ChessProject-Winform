@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ChessUI
 {
@@ -17,31 +14,23 @@ namespace ChessUI
     {
         private TcpListener server;
         private List<TcpClient> clients = new List<TcpClient>();
+        private Queue<TcpClient> playerQueue = new Queue<TcpClient>();
         private Thread listenThread;
-        public event EventHandler<string> MoveReceived;
 
         public ChessServer()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            server = new TcpListener(IPAddress.Any, 8080);
+            server = new TcpListener(IPAddress.Any, 8888);
             server.Start();
             listenThread = new Thread(ListenForClients);
             listenThread.Start();
             buttonStart.Text = "Listening";
-            richTextBox1.AppendText("Server is listening on port 8080...\n");
-        }
-
-     
-        public void StartListening(int port)
-        {
-            server = new TcpListener(IPAddress.Any, port);
-            server.Start();
-            listenThread = new Thread(ListenForClients);
-            listenThread.Start();
+            richTextBox1.AppendText("Server is listening on port 8888...\n");
         }
 
         private void ListenForClients()
@@ -49,44 +38,115 @@ namespace ChessUI
             while (true)
             {
                 TcpClient client = server.AcceptTcpClient();
-                clients.Add(client);
+                lock (playerQueue)
+                {
+                    playerQueue.Enqueue(client);
+                    richTextBox1.AppendText($"Player added to queue. Queue size: {playerQueue.Count}\n");
 
-                string clientInfo = "New client connected from " + ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString() + ":" + ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString();
-                richTextBox1.AppendText(clientInfo + "\n");
-                Thread clientThread = new Thread(HandleClient);
-                clientThread.Start(client);
+                    if (playerQueue.Count >= 2)
+                    {
+                        StartMatch();
+                    }
+                }
             }
         }
 
-        private void HandleClient(object client)
+        private void StartMatch()
         {
-            TcpClient tcpClient = (TcpClient)client;
-            NetworkStream clientStream = tcpClient.GetStream();
+            TcpClient player1 = playerQueue.Dequeue();
+            TcpClient player2 = playerQueue.Dequeue();
+
+            // Send "isHost:true" to the first player
+            SendIsHostMessage(player1, true);
+            // Send "isHost:false" to the second player
+            SendIsHostMessage(player2, false);
+
+            // Notify both players that a match has been found
+            SendMatchFoundMessage(player1);
+            SendMatchFoundMessage(player2);
+
+            lock (clients)
+            {
+                clients.Add(player1);
+                clients.Add(player2);
+            }
+
+            Thread player1Thread = new Thread(HandleClient);
+            Thread player2Thread = new Thread(HandleClient);
+            player1Thread.Start(player1);
+            player2Thread.Start(player2);
+
+            richTextBox1.AppendText("Match found! Players have been paired.\n");
+        }
+
+        private void SendMatchFoundMessage(TcpClient client)
+        {
+            NetworkStream stream = client.GetStream();
+            string message = "MatchFound";
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            stream.Write(data, 0, data.Length);
+        }
+
+        private void SendIsHostMessage(TcpClient client, bool isHost)
+        {
+            NetworkStream stream = client.GetStream();
+            string message = isHost ? "isHost:true" : "isHost:false";
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            stream.Write(data, 0, data.Length);
+        }
+
+        private void HandleClient(object clientObj)
+        {
+            TcpClient client = (TcpClient)clientObj;
+            NetworkStream clientStream = client.GetStream();
             byte[] message = new byte[4096];
             int bytesRead;
 
             while (true)
             {
-                bytesRead = clientStream.Read(message, 0, 4096);
-                string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
-                BroadcastMessage(receivedMessage);
-                richTextBox1.AppendText(receivedMessage + "\n");
+                try
+                {
+                    bytesRead = clientStream.Read(message, 0, 4096);
+                    if (bytesRead == 0)
+                    {
+                        break; // Client disconnected
+                    }
+                    string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
+                    BroadcastMessage(receivedMessage);
+                    richTextBox1.AppendText(receivedMessage + "\n");
+                }
+                catch
+                {
+                    break; // Exception occurred (client disconnected)
+                }
             }
 
-
+            // Remove client from the list when it disconnects
+            lock (clients)
+            {
+                clients.Remove(client);
+            }
         }
 
         private void BroadcastMessage(string message)
         {
-            foreach (TcpClient client in clients)
-            {
-                NetworkStream clientStream = client.GetStream();
-                byte[] broadcastMessage = Encoding.ASCII.GetBytes(message);
-                clientStream.Write(broadcastMessage, 0, broadcastMessage.Length);
-            }
+          
+                foreach (TcpClient client in clients)
+                {
+                    NetworkStream clientStream = client.GetStream();
+                    byte[] broadcastMessage = Encoding.ASCII.GetBytes(message);
+                    clientStream.Write(broadcastMessage, 0, broadcastMessage.Length);
+                }
+            
         }
 
-       
-
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (server != null)
+            {
+                server.Stop();
+            }
+            base.OnFormClosing(e);
+        }
     }
 }

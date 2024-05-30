@@ -19,7 +19,7 @@ namespace ChessUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
+           MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
             
 
